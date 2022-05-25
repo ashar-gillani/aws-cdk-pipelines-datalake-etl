@@ -5,7 +5,7 @@ import aws_cdk.core as cdk
 import aws_cdk.aws_dynamodb as dynamodb
 
 from .configuration import (
-    PROD, TEST, get_logical_id_prefix, get_resource_name_prefix,
+    get_logical_id_prefix, get_resource_name_prefix,
 )
 
 
@@ -26,8 +26,8 @@ class DynamoDbStack(cdk.Stack):
         resource_name_prefix = get_resource_name_prefix().replace('-', '_')
 
         self.removal_policy = cdk.RemovalPolicy.DESTROY
-        if (target_environment == PROD or target_environment == TEST):
-            self.removal_policy = cdk.RemovalPolicy.RETAIN
+        # if (target_environment == PROD or target_environment == TEST):
+        #     self.removal_policy = cdk.RemovalPolicy.RETAIN
 
         self.job_audit_table = dynamodb.Table(
             self,
